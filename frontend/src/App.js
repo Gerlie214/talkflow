@@ -1,56 +1,42 @@
-import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
+import { Toaster } from "sonner";
+import Layout from "@/components/Layout";
+import Dashboard from "@/pages/Dashboard";
+import Library from "@/pages/Library";
+import TopicDetail from "@/pages/TopicDetail";
+import Practice from "@/pages/Practice";
+import CustomScript from "@/pages/CustomScript";
+import FreeSpeaking from "@/pages/FreeSpeaking";
+import PracticeComplete from "@/pages/PracticeComplete";
+import History from "@/pages/History";
+import ProgressPage from "@/pages/ProgressPage";
+import Settings from "@/pages/Settings";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
-
-function App() {
+export default function App() {
   return (
     <div className="App">
+      <div className="tf-grain" aria-hidden />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
+          {/* Immersive routes without layout chrome */}
+          <Route path="/practice" element={<Practice />} />
+          <Route path="/complete" element={<PracticeComplete />} />
+
+          {/* Routes with layout chrome */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/topic/:id" element={<TopicDetail />} />
+            <Route path="/custom" element={<CustomScript />} />
+            <Route path="/free" element={<FreeSpeaking />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster theme="dark" position="bottom-right" />
     </div>
   );
 }
-
-export default App;
