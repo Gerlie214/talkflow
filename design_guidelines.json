@@ -1,0 +1,110 @@
+{
+  "project_name": "TalkFlow",
+  "theme_strategy": {
+    "name": "Acoustic Obsidian (Dark Studio Theme)",
+    "description": "A dark, highly-focused studio environment designed to reduce anxiety and enhance focus. Mimics a high-end recording booth using deep slate/obsidian bases, glowing amber/warm accents for active states, and calm sage for completions.",
+    "mode": "Dark mode primary (toggleable to Light mode, but optimize for Dark)."
+  },
+  "typography": {
+    "fonts": {
+      "headings": "Outfit",
+      "body": "Manrope",
+      "install_instruction": "Add to index.html or import via @font-face/Google Fonts."
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight font-medium text-white",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-medium text-white/90",
+      "h3": "text-xl sm:text-2xl tracking-tight font-medium text-white/80",
+      "karaoke_active": "text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight text-white transition-all duration-300 transform scale-100",
+      "karaoke_inactive": "text-2xl md:text-3xl font-medium tracking-normal leading-relaxed text-white/30 transition-all duration-500",
+      "karaoke_completed": "text-2xl md:text-3xl font-medium tracking-normal leading-relaxed text-[#A3B19B]/40 transition-all duration-500",
+      "labels": "text-xs tracking-[0.2em] uppercase font-bold text-white/50",
+      "body": "text-base text-white/70 leading-relaxed"
+    }
+  },
+  "colors": {
+    "background": "#09090B",
+    "surface": "#121214",
+    "surface_glass": "bg-black/60 backdrop-blur-2xl border-t border-white/10",
+    "primary": "#FFB067",
+    "primary_hover": "#FF9D42",
+    "success": "#A3B19B",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A1A1AA",
+    "border": "#27272A",
+    "ring": "#FFB067"
+  },
+  "visual_enhancers": {
+    "karaoke_focus": "Use a subtle linear gradient mask (`mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)`) on the scrolling container to fade out text at the top and bottom edges.",
+    "recording_glow": "When recording is active, add an absolute positioned `div` behind the mic icon with `bg-[#FFB067] blur-2xl opacity-40 animate-pulse`.",
+    "grid_lines": "Dashboard uses an exposed skeleton grid layout (`border-collapse`) with subtle 1px borders (`border-white/10`) to feel like technical studio software."
+  },
+  "layouts": {
+    "dashboard": "Mode B: High Density Bento Grid. Base: `grid-cols-1 md:grid-cols-4 gap-6`. 'Continue Practice' hero card takes `col-span-1 md:col-span-3`, stats take `col-span-1`.",
+    "karaoke_screen": "Immersive 100vh layout. Hidden header/footer. Lyrics vertically centered in the viewport. Controls contained in a bottom floating glassmorphism pill."
+  },
+  "motion": {
+    "lyric_scroll": "Smooth continuous transition for vertical translation using `framer-motion`. Active line scales up slightly.",
+    "controls_reveal": "Controls pill slides up from bottom (`translate-y-0`) on mouse movement/pause, hides (`translate-y-24`) after a few seconds of active speaking.",
+    "page_transitions": "Fade and slight scale-up (`scale: 0.98` to `1.0`) on page load to feel deliberate and calm."
+  },
+  "components_strategy": [
+    {
+      "name": "KaraokeTeleprompter",
+      "description": "The hero component for the practice screen.",
+      "guidelines": "Use `framer-motion` to animate the Y-axis translation of the sentence container based on the active index. Do not center align text horizontally—keep it left-aligned for natural reading, but vertically centered in the screen."
+    },
+    {
+      "name": "StudioControlPill",
+      "description": "Floating action bar during practice.",
+      "guidelines": "Position `fixed bottom-8 left-1/2 -translate-x-1/2`. Use Crystal Glassmorphism (`bg-white/10 backdrop-blur-xl border border-white/20 saturate-150`). Contains Play/Pause, Restart, Next, Exit."
+    },
+    {
+      "name": "TopicBentoCard",
+      "description": "Card for library topics.",
+      "guidelines": "Flat background (`bg-[#121214]`), 1px subtle border (`border-[#27272A]`), no heavy drop shadow. Hover state: `-translate-y-1`, `border-white/30`, `bg-[#18181B]`."
+    }
+  ],
+  "accessibility": {
+    "contrast": "Ensure active karaoke text is purely white on deep black background.",
+    "focus": "All interactive elements MUST have `focus:ring-2 focus:ring-[#FFB067] focus:outline-none focus:ring-offset-2 focus:ring-offset-[#09090B]`.",
+    "screen_readers": "Provide `aria-live=\"polite\"` regions for the timer and current sentence updates."
+  },
+  "media": {
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1633933757597-2d09c360c2ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBzcGVha2luZyUyMG1pY3JvcGhvbmUlMjByZWNvcmRpbmclMjBzdHVkaW8lMjB3YXJtJTIwbGlnaHRpbmd8ZW58MHx8fHwxNzg2MTIzNDI5fDA&ixlib=rb-4.1.0&q=85",
+        "category": "hero_background",
+        "description": "Warm lit microphone in studio. Use for the dashboard 'Quick Start' hero card background with a heavy `bg-black/60` overlay."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1655841439659-0afc60676b70?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMHNvdW5kJTIwd2F2ZXMlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODYxMjM0Mjl8MA&ixlib=rb-4.1.0&q=85",
+        "category": "ambient_texture",
+        "description": "Dark abstract waves. Use as a very low opacity (10-15%) fixed background texture `mix-blend-overlay` for the entire app."
+      }
+    ]
+  },
+  "libraries": {
+    "animation": "framer-motion",
+    "icons": "lucide-react",
+    "routing": "react-router-dom",
+    "toast": "sonner",
+    "charts": "recharts (for progress statistics)"
+  },
+  "instructions_to_main_agent": [
+    "Install custom fonts Outfit and Manrope before building UI.",
+    "Add tailwind configuration for custom colors and grid utilities.",
+    "Implement the layout with generic HTML tags (`main`, `section`, `nav`) using Tailwind classes, avoiding over-reliance on boxed Shadcn cards for the main layout.",
+    "Create the `data-testid` properties on all buttons and inputs immediately as you write the components."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "DO NOT use Inter or generic fonts for headings. Use Outfit for headings, Manrope for body text.",
+    "Do not use generic centered layouts for dashboards. Use the asymmetrical bento grid. The only element that should be vertically centered is the Karaoke practice screen.",
+    "DO NOT apply `transition: all`. Target specific properties like `transition-colors`, `transition-transform`, `transition-opacity`.",
+    "Every interactive element MUST include a `data-testid` attribute (e.g., `data-testid=\"start-practice-button\"`).",
+    "NEVER use fully transparent backgrounds for floating elements (headers, dropdowns, sticky controls). Always use a blur and a semi-transparent dark color (e.g., `bg-black/60 backdrop-blur-xl`).",
+    "In the Karaoke practice mode, hide navigation bars. Make it a 100vh immersive experience.",
+    "Implement smooth scrolling using CSS (`scroll-behavior: smooth`) or `lenis` if complex scrolling is needed.",
+    "Avoid standard Bootstrap-like grids. Utilize negative space and generous padding (`p-6` to `p-12`) inside containers."
+  ]
+}
