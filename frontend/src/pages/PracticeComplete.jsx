@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { CheckCircle2, Play, Home, RotateCcw } from "lucide-react";
 import { getRecording } from "@/lib/storage";
@@ -7,7 +7,7 @@ import { formatSeconds } from "@/lib/format";
 export default function PracticeComplete() {
   const loc = useLocation();
   const nav = useNavigate();
-  const state = loc.state || {};
+  const state = useMemo(() => loc.state || {}, [loc.state]);
   const [audioUrl, setAudioUrl] = useState(null);
 
   useEffect(() => {

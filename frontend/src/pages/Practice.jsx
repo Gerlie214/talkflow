@@ -16,7 +16,7 @@ import { toast } from "sonner";
 export default function Practice() {
   const nav = useNavigate();
   const loc = useLocation();
-  const state = loc.state || {};
+  const state = useMemo(() => loc.state || {}, [loc.state]);
   const settings = getSettings();
 
   const [sentences, setSentences] = useState([]);
