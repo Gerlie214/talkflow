@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getDeviceId } from "./storage";
 
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const BACKEND = process.env.REACT_APP_BACKEND_URL || "";
 export const API = `${BACKEND}/api`;
 
 const client = axios.create({ baseURL: API });
